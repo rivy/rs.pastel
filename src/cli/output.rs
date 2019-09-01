@@ -85,7 +85,7 @@ impl Output<'_> {
     }
 
     pub fn show_color(&mut self, config: &Config, color: &Color) -> Result<()> {
-        if config.interactive_mode {
+        if config.interactive_mode && config.color_output {
             if self.colors_shown < 1 {
                 writeln!(self.handle)?
             };

@@ -7,4 +7,5 @@ pub struct Config {
     pub colorcheck_width: usize,
     pub interactive_mode: bool,
     pub brush: Brush,
+    pub color_output: bool,
 }

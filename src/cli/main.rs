@@ -39,8 +39,9 @@ fn run() -> Result<ExitCode> {
 
     let interactive_mode = atty::is(Stream::Stdout);
 
+    let mut color_output = false;
     if interactive_mode {
-        output_vt100::init();
+        color_output = output_vt100::try_init().is_ok();
     }
 
     let color_mode = match global_matches
@@ -102,6 +103,7 @@ fn run() -> Result<ExitCode> {
         colorcheck_width: 8,
         interactive_mode,
         brush: Brush::from_mode(color_mode),
+        color_output: color_output,
     };
 
     if let (subcommand, Some(matches)) = global_matches.subcommand() {
