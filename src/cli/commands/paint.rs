@@ -55,7 +55,11 @@ impl GenericCommand for PaintCommand {
         write!(
             out.handle,
             "{}{}",
-            config.brush.paint(text, style),
+            if config.color_output {
+                config.brush.paint(text, style)
+            } else {
+                text
+            },
             if matches.is_present("no-newline") {
                 ""
             } else {

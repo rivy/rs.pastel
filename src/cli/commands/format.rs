@@ -47,7 +47,7 @@ impl ColorCommand for FormatCommand {
             _ => true,
         };
 
-        if write_colored_line {
+        if write_colored_line && config.color_output {
             writeln!(
                 out.handle,
                 "{}",

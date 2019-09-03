@@ -6,6 +6,9 @@ pub struct PickCommand;
 
 impl GenericCommand for PickCommand {
     fn run(&self, out: &mut Output, _: &ArgMatches, config: &Config) -> Result<()> {
+        if !config.color_output {
+            return Err(PastelError::ColorOutputNotAvailable);
+        }
         print_colorspectrum(config)?;
         let color_str = run_external_colorpicker()?;
 

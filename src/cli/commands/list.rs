@@ -14,7 +14,7 @@ impl GenericCommand for ListCommand {
         colors.sort_by_key(|nc| key_function(sort_order, &nc.color));
         colors.dedup_by(|n1, n2| n1.color == n2.color);
 
-        if config.interactive_mode {
+        if config.interactive_mode && config.color_output {
             for nc in colors {
                 let bg = &nc.color;
                 let fg = bg.text_color();

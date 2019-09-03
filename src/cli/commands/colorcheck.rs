@@ -43,6 +43,9 @@ fn print_board(out: &mut Output, config: &Config, mode: Mode) -> Result<()> {
 
 impl GenericCommand for ColorCheckCommand {
     fn run(&self, out: &mut Output, _: &ArgMatches, config: &Config) -> Result<()> {
+        if !config.color_output {
+            return Err(PastelError::ColorOutputNotAvailable);
+        }
         writeln!(out.handle, "\n8-bit mode:")?;
         print_board(out, config, Mode::Ansi8Bit)?;
 
