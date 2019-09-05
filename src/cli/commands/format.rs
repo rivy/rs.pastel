@@ -56,7 +56,7 @@ impl ColorCommand for FormatCommand {
                     .paint(output, color.text_color().ansi_style().on(color))
             )?;
         } else {
-            write!(out.handle, "{}", output)?;
+            writeln!(out.handle, "{}", output)?;
         }
 
         Ok(())
