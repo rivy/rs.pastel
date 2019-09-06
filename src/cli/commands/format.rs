@@ -36,6 +36,7 @@ impl ColorCommand for FormatCommand {
             "brightness" => format!("{:.3}", color.brightness()),
             "ansi-8bit" => color.to_ansi_sequence(Mode::Ansi8Bit),
             "ansi-24bit" => color.to_ansi_sequence(Mode::TrueColor),
+            "swatch" => out.show_color_tty(config, color),
             "name" => similar_colors(color)[0].name.to_owned(),
             &_ => {
                 unreachable!("Unknown format type");
@@ -43,7 +44,7 @@ impl ColorCommand for FormatCommand {
         };
 
         let write_colored_line = match format_type.as_ref() {
-            "ansi-8bit" | "ansi-24bit" => false,
+            "ansi-8bit" | "ansi-24bit" | "swatch" => false,
             _ => true,
         };
 
