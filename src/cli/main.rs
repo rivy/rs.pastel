@@ -39,10 +39,7 @@ fn run() -> Result<ExitCode> {
 
     let interactive_mode = atty::is(Stream::Stdout);
 
-    let mut color_output = false;
-    if interactive_mode {
-        color_output = output_vt100::try_init().is_ok();
-    }
+    let color_output = ( interactive_mode && output_vt100::try_init().is_ok() ) || match global_matches.value_of("color-mode") { Some("24bit") | Some("8bit") => true, _ => false };
 
     let color_mode = match global_matches
         .value_of("color-mode")
