@@ -122,6 +122,7 @@ impl Color {
     /// - https://en.wikipedia.org/wiki/CIE_1931_color_space
     /// - https://en.wikipedia.org/wiki/SRGB
     pub fn from_xyz(x: Scalar, y: Scalar, z: Scalar, alpha: Scalar) -> Color {
+        #![allow(clippy::many_single_char_names)]
         let f = |c| {
             if c <= 0.0031308 {
                 12.92 * c
@@ -140,6 +141,7 @@ impl Color {
     /// Create a `Color` from LMS coordinates. This is the matrix inverse of the matrix that
     /// appears in `to_lms`.
     pub fn from_lms(l: Scalar, m: Scalar, s: Scalar, alpha: Scalar) -> Color {
+        #![allow(clippy::many_single_char_names)]
         let x = 1.91020 * l - 1.112120 * m + 0.201908 * s;
         let y = 0.37095 * l + 0.629054 * m + 0.000000 * s;
         let z = 0.00000 * l + 0.000000 * m + 1.000000 * s;
@@ -151,6 +153,7 @@ impl Color {
     ///
     /// See: https://en.wikipedia.org/wiki/Lab_color_space
     pub fn from_lab(l: Scalar, a: Scalar, b: Scalar, alpha: Scalar) -> Color {
+        #![allow(clippy::many_single_char_names)]
         const DELTA: Scalar = 6.0 / 29.0;
 
         let finv = |t| {
@@ -175,6 +178,7 @@ impl Color {
     ///
     /// See: https://en.wikipedia.org/wiki/Lab_color_space
     pub fn from_lch(l: Scalar, c: Scalar, h: Scalar, alpha: Scalar) -> Color {
+        #![allow(clippy::many_single_char_names)]
         const DEG2RAD: Scalar = std::f64::consts::PI / 180.0;
 
         let a = c * Scalar::cos(h * DEG2RAD);
@@ -302,6 +306,7 @@ impl Color {
     /// - https://en.wikipedia.org/wiki/CIE_1931_color_space
     /// - https://en.wikipedia.org/wiki/SRGB
     pub fn to_xyz(&self) -> XYZ {
+        #![allow(clippy::many_single_char_names)]
         let finv = |c_| {
             if c_ <= 0.04045 {
                 c_ / 12.92
