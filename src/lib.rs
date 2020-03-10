@@ -873,7 +873,7 @@ impl ColorScale {
         let same_position = self
             .color_stops
             .iter_mut()
-            .find(|c| position.value() == c.position.value());
+            .find(|c| (position.value() - c.position.value()).abs() < std::f64::EPSILON);
 
         match same_position {
             Some(color_stop) => color_stop.color = color,

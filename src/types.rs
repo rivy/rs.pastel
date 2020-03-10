@@ -15,7 +15,7 @@ impl Hue {
 
     /// Return a hue value in the interval [0, 360].
     pub fn value(self) -> Scalar {
-        if self.unclipped == 360.0 {
+        if (self.unclipped - 360.0).abs() < std::f64::EPSILON {
             self.unclipped
         } else {
             mod_positive(self.unclipped, 360.0)
