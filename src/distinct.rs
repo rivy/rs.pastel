@@ -144,15 +144,18 @@ impl<R: Rng> SimulatedAnnealing<R> {
             } else {
                 // first check if any of the colors cannot change, if that's the case just return
                 // the other color. Note that the closest_pair cannot contain only fixed colors.
-                if result.closest_pair.0 < self.parameters.num_fixed_colors {
-                    result.closest_pair.1
-                } else if result.closest_pair.1 < self.parameters.num_fixed_colors {
-                    result.closest_pair.0
-                } else {
-                    if self.rng.gen() {
+                #[allow(clippy::collapsible_if)]
+                {
+                    if result.closest_pair.0 < self.parameters.num_fixed_colors {
+                        result.closest_pair.1
+                    } else if result.closest_pair.1 < self.parameters.num_fixed_colors {
                         result.closest_pair.0
                     } else {
-                        result.closest_pair.1
+                        if self.rng.gen() {
+                            result.closest_pair.0
+                        } else {
+                            result.closest_pair.1
+                        }
                     }
                 }
             };
